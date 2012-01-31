@@ -1,0 +1,26 @@
+OVERVIEW
+Greenpeace is a complete solution to keep your projects' per environment configuration centralized in one single place.
+If your projects have to graduate from environment to environment (IC, RC, BC, PROD) until they reach Production Quality, Greenpeace can help you a lot.
+
+HISTORY
+It was inspired by ESCape's great idea, but as it's done in ruby and it's kind of discontinued (no activity since 2009) I decided to start it from scratch using my technology of choice (Grails, TW Bootstrap, neo4j) so I can improve it fixing some limitations I've found using ESCape in the projects I worked on.
+http://code.google.com/p/escservesconfig/
+
+TECHNOLOGY
+The main platform is Grails as it is based on Java, my main programming language, and it is terribly easy and fast for developing web applications, you need just to focus on your business since you have all the infrastructure issues resolved.
+I've choose to give Twitter Bootstrap a chance, I'm a back-end developer and it seems that TW Bootstrap has all the things I'm not good at, such as HTML, Layout, CSS, JavaScript, etc. resolved for me.
+For persistence I was looking for the best suite option for this king of model, relational DBs was not an option, the main entities are Environment and Projects related each other and a bunch of properties (key-value) for the interjection of both. So I got to the conclusion that a Graph DB is the way to go. A good one is Neo4j, it's Open Source and for me, the killer feature is the fact that it can be embeddable in a Java application, It makes easier the installation for end users (no DB server running and configured is needed).
+
+FEATURES
+ * A really functional UI, you can browse configurations by environment, useful for cross-project administrators, or you can do it by project, useful for the project owner/deployer.
+ * Per user permissions setup, 
+ * I supports project versioning, so if the project has new or removed properties, it's not need these changes to reach all the environments the project is deployed in.
+ * RESTful API for modifying or accessing the projects' configurations from any platform you need.
+ * Some related tools projects, such as Spring Integration for scoped configuration and a Maven plugin.
+ * Easy installation.
+
+INSTALLATION
+As Mentioned before installing it is really easy, it's just a matter of dropping the WAR in a Running Tomcat and that's all you access it at http://yourserver:port/greenpeace. You don't even need to setup an external Database thanks to the embedded one.
+
+FURTHER DOCUMENTATION
+//TODO 
