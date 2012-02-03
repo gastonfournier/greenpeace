@@ -17,6 +17,7 @@ grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       xml: ['text/xml', 'application/xml'],
                       text: 'text/plain',
+                      properties: 'text/plain',
                       js: 'text/javascript',
                       rss: 'application/rss+xml',
                       atom: 'application/atom+xml',
@@ -46,6 +47,8 @@ grails.scaffolding.templates.domainSuffix = 'Instance'
 
 // Set to false to use the new Grails 1.2 JSONBuilder in the render method
 grails.json.legacy.builder = false
+grails.converters.json.default.deep=true
+grails.converters.xml.default.deep=true
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 // packages to include in Spring bean scanning

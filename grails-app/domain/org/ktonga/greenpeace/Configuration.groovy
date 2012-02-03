@@ -10,7 +10,11 @@ class Configuration {
 	Environment environment1
 	
 	Overrides getOverrides(String ver) {
-		this.overrides.find {it.version1.matches(ver)}
+		def found
+		if(!ver || !(found = this.overrides.find {it.version1.matches(ver)})) {
+			found = this.overrides.find {it.version1 == this.project.defaultVersion}
+		}
+		return found
 	}
 	
 }

@@ -1,10 +1,16 @@
 class UrlMappings {
 
 	static mappings = {
-		"/$controller/$action?/$id?"{
-			constraints {
-				// apply constraints here
-			}
+		"/api/environment/$name" {
+			controller = "api"
+			action = [GET: "show", PUT: "update", DELETE: "delete", POST: "save"]
+		}
+		"/api/$project/$env/$ver/$filename" {
+			controller = "api"
+			action = "effectiveProperties"
+		}
+		"/api/$action" {
+			controller = "api"
 		}
 
 		"/"(view:"/index")
