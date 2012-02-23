@@ -1,9 +1,3 @@
-if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
-		}).ajaxStop(function() {
-			$(this).fadeOut();
-		});
-	})(jQuery);
+function loadConfig(proj, env) {
+	$('#config').load('/greenpeace/browse/config?project='+proj+'&env=' +env);
 }
