@@ -1,9 +1,9 @@
 package org.ktonga.greenpeace
 
-class VersionTests {
+class TagTests {
 
     void testMatchingPrefix() {
-       Version v = new Version(name: "v1.2", matchingPrefix: "1.2")
+       Tag v = new Tag(name: "v1.2", matchingPrefix: "1.2")
 	   assert v.matches("1.2")
 	   assert v.matches("1.2.3")
 	   assert v.matches("1.2-SNAPSHOT")
@@ -13,8 +13,8 @@ class VersionTests {
     }
     
     void testMatchingEmptyPrefix() {
-    	Version emptyPrefix = new Version(name: "v1.2", matchingPrefix: "")
-    	Version nullPrefix = new Version(name: "v1.2", matchingPrefix: null)
+    	Tag emptyPrefix = new Tag(name: "v1.2", matchingPrefix: "")
+    	Tag nullPrefix = new Tag(name: "v1.2", matchingPrefix: null)
     	assert emptyPrefix.matches("1.2")
     	assert emptyPrefix.matches("1.2-SNAPSHOT")
     	assert nullPrefix.matches("1.2.3")

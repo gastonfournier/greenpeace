@@ -9,10 +9,10 @@ class Configuration {
 	
 	Environment environment1
 	
-	Overrides getOverrides(String ver) {
+	Overrides getOverrides(String tag) {
 		def found
-		if(!ver || !(found = this.overrides.find {it.version1.matches(ver)})) {
-			found = this.overrides.find {it.version1 == this.project.defaultVersion}
+		if(!tag || !(found = this.overrides.find {it.tag.matches(tag)})) {
+			found = this.overrides.find {it.tag == this.project.defaultTag}
 		}
 		return found
 	}

@@ -4,15 +4,15 @@ class Project {
 
 	static constraints = {
 		description nullable: true
-		defaultVersion nullable: true
+		defaultTag nullable: true
 	}
 
-	static hasMany = [versions: Version, configurations: Configuration]
+	static hasMany = [tags: Tag, configurations: Configuration]
 
 	String name
 	String description
-	// Use this version when no version is specified.
-	Version defaultVersion
+	// Use this tag when no tag is specified.
+	Tag defaultTag
 	
 	Configuration getConfiguration(String env) {
 		this.configurations.find {it.environment1.name == env}

@@ -22,7 +22,7 @@ class ApiController {
 
 	def effectiveProperties() {
 		def project = Project.findByName(params.project)
-		def props = project.getConfiguration(params.env).getOverrides(params.ver)
+		def props = project.getConfiguration(params.env).getOverrides(params.tag)
 		def effective = props.effectiveProperties()
 		def result = effective.collect {[key: it.key, value: it.value, usingDefault: it.usingDefault]}
 		doFormat(result, [props: props])

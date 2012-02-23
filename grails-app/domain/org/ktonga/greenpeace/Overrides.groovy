@@ -7,14 +7,14 @@ class Overrides {
 
 	static belongsTo = [configuration: Configuration]
 	
-	Version version1
+	Tag tag
 	// Map<propName, overrideValue>
 	Map<String, String> propertyValues
 	
 	List<MergedProperty> effectiveProperties() {
-		this.version1.propertyDefs.keySet().sort().collect {
+		this.tag.propertyDefs.keySet().sort().collect {
 			def usingDefault = !this.propertyValues.containsKey(it)
-			def value = usingDefault ? this.version1.propertyDefs[it] : this.propertyValues[it]
+			def value = usingDefault ? this.tag.propertyDefs[it] : this.propertyValues[it]
 			new MergedProperty(key: it, value: value, usingDefault: usingDefault)
 		}
 	}

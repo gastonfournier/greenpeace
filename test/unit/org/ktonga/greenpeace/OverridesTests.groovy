@@ -5,7 +5,7 @@ import org.ktonga.greenpeace.Overrides.MergedProperty
 class OverridesTests {
 
 	void testEffectiveProperties() {
-		Version v = new Version()
+		Tag v = new Tag()
 		v.propertyDefs = [prop1: "def1", prop2: "def2", prop3: "def3", prop4: "def4"]
 		Overrides o = new Overrides(version1: v)
 		o.propertyValues = [prop1: "val1", prop3: "val3"]

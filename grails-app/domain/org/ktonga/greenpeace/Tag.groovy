@@ -1,6 +1,6 @@
 package org.ktonga.greenpeace
 
-class Version {
+class Tag {
 
 	static constraints = {
 		matchingPrefix nullable: true
@@ -15,5 +15,9 @@ class Version {
 	
 	boolean matches(String ver) {
 		!this.matchingPrefix || ver.startsWith(this.matchingPrefix)
+	}
+	
+	String getEncodedName() {
+		this.name.replace('.','_')
 	}
 }

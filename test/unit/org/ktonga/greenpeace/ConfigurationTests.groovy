@@ -10,8 +10,8 @@ import java.awt.print.Book
 class ConfigurationTests {
 
 	void testGetOverrides() {
-		Version v1 = new Version(matchingPrefix: "1.1")
-		Version v2 = new Version(matchingPrefix: "1.2")
+		Tag v1 = new Tag(matchingPrefix: "1.1")
+		Tag v2 = new Tag(matchingPrefix: "1.2")
 		Overrides o1 = new Overrides(version1: v1)
 		Overrides o2 = new Overrides(version1: v2)
 		Configuration conf = new Configuration()
