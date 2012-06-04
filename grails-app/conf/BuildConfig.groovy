@@ -34,6 +34,8 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
+		runtime 'org.codehaus.jackson:jackson-mapper-asl:1.9.7'
+		runtime 'org.apache.httpcomponents:httpclient:4.1'
     }
 
     plugins {
