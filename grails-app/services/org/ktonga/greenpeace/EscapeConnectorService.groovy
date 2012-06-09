@@ -2,10 +2,7 @@ package org.ktonga.greenpeace
 
 import java.util.List;
 
-import org.apache.commons.codec.binary.StringUtils
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
+import org.apache.commons.lang.StringUtils
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -18,6 +15,7 @@ class EscapeConnectorService {
         List<String> envs = []
 		String finalUrl = "${fixedServer}/environments";
 		try {
+			log.info("Querying ${finalUrl}")
 			String contents = downloaderService.download(finalUrl)
 			if (!StringUtils.isEmpty(contents)){
 				envs = mapper.readValue(contents, new TypeReference<List<String>>(){})
@@ -46,12 +44,14 @@ class EscapeConnectorService {
 	// fixes server add http:// remove last / if exists
 	private String fix(String serverString){
 		String server = serverString
-		if (! (/https?:\/\// =~ serverString)){
+		if (! (serverString =~  /https?:\/\// )){
 			server = "http://${serverString}"
 		}
 		
 		if (server.endsWith("/")){
 			server = server.substring(0, server.length() - 1)
 		}
+		
+		return server;
 	} 
 }

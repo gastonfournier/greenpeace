@@ -14,9 +14,8 @@ class ManageController {
 	}
 
 	def showServerConfiguration() {
-		def server = fix(params.server);
 		def envs = escapeConnectorService.environments(params.server)
-		render view: 'importConfiguration', model: [parents: envs, server: server]
+		render view: 'importConfiguration', model: [parents: envs, server: params.server]
 	}
 
 	def config() {
@@ -34,5 +33,4 @@ class ManageController {
 	private Configuration findConfig(def parameters) {
 		Project.findByName(params.project).getConfiguration(params.env)
 	}
-
 }
