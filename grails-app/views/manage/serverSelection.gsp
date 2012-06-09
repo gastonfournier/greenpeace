@@ -9,12 +9,14 @@
 </head>
 <body>
 	<div class="row">
-		<div class="span4">
-			<g:form action="showServerConfiguration">
-				<label for="server">Server (http://):</label>
-				<input name="server" id="server" type="text" />
-				<g:actionSubmit action="showServerConfiguration" value="Query server configuration"/>
-			</g:form>
+		<div class="span3 well step1">
+			<label for="server">Server (http://):</label>
+			<input name="server" id="server" type="text" />
+			<input type="button" value="Query server configuration"/>
+		</div>
+		<div class="span3 step2" id="environments">
+		</div>
+		<div class="span3 step3" id="applications">
 		</div>
 	</div>
 </body>

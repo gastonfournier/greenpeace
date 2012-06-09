@@ -1,8 +1,8 @@
 package org.ktonga.greenpeace
 
-import org.apache.commons.lang.StringUtils
-import org.codehaus.jackson.map.ObjectMapper
-import org.codehaus.jackson.type.TypeReference
+import java.util.List
+import org.ktonga.greenpeace.compatibility.EscapeApplicationsResponse
+import org.ktonga.greenpeace.compatibility.EscapeEnvironmentsResponse
 
 class ManageController {
 
@@ -13,9 +13,23 @@ class ManageController {
 		render view: 'serverSelection', model: []
 	}
 
-	def showServerConfiguration() {
-		def envs = escapeConnectorService.environments(params.server)
-		render view: 'importConfiguration', model: [parents: envs, server: params.server]
+	def showServerConfiguration(String server) {
+		try{
+			EscapeEnvironmentsResponse resp = escapeConnectorService.environments(server);
+			render view: 'importConfiguration', model: [environments: resp.environments, server: resp.server]
+		} catch (Exception e){
+			// TODO show an error page
+			render view: 'importConfiguration', model: [environments: [], server: server]
+		}
+	}
+	
+	def showApplications(String server, String envs){
+		EscapeApplicationsResponse resp;
+		List<String> envsList = envs.split(",")
+		for (String env : envsList) {
+			resp = escapeConnectorService.applications(server, env)
+		}
+		render view: 'viewApplications', model: [server: resp.server, applications: resp.applications]
 	}
 
 	def config() {

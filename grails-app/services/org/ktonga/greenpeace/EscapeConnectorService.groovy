@@ -5,40 +5,37 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.ktonga.greenpeace.compatibility.EscapeApplicationsResponse;
+import org.ktonga.greenpeace.compatibility.EscapeEnvironmentsResponse
 
 class EscapeConnectorService {
 	def downloaderService
 	private ObjectMapper mapper = new ObjectMapper();
 	
-    public List<String> environments(String server) {
+    public EscapeEnvironmentsResponse environments(String server) {
 		String fixedServer = fix(server)
-        List<String> envs = []
+        EscapeEnvironmentsResponse ret = new EscapeEnvironmentsResponse(server: fixedServer, environments: [])
 		String finalUrl = "${fixedServer}/environments";
-		try {
-			log.info("Querying ${finalUrl}")
-			String contents = downloaderService.download(finalUrl)
-			if (!StringUtils.isEmpty(contents)){
-				envs = mapper.readValue(contents, new TypeReference<List<String>>(){})
-			}
-		} catch (Exception e){
-			log.error("An error ocurred while downloading ${finalUrl}", e)
+		log.info("Querying ${finalUrl}")
+		String contents = downloaderService.download(finalUrl)
+		if (!StringUtils.isEmpty(contents)){
+			ret.environments = mapper.readValue(contents, new TypeReference<List<String>>(){}); 
 		}
-		return envs;
+		return ret;
     }
     
-	public List<String> applications(String server, String environment){
+	public EscapeApplicationsResponse applications(String server, String environment){
 		String fixedServer = fix(server)
+		EscapeApplicationsResponse resp = new EscapeApplicationsResponse(server: fixedServer, environment: environment);
 		List<String> applications = []
 		String finalUrl = "${fixedServer}/environments/${environment}";
-		try {
-			String contents = downloaderService.download(finalUrl)
-			if (!StringUtils.isEmpty(contents)){
-				applications = mapper.readValue(contents, new TypeReference<List<String>>(){})
-			}
-		} catch (Exception e){
-			log.error("An error ocurred while downloading ${finalUrl}", e)
+		log.info("Querying ${finalUrl}")
+		String contents = downloaderService.download(finalUrl)
+		if (!StringUtils.isEmpty(contents)){
+			applications = mapper.readValue(contents, new TypeReference<List<String>>(){})
+			resp.applications = applications
 		}
-		return applications
+		return resp
 	}
 	
 	// fixes server add http:// remove last / if exists
