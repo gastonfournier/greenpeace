@@ -84,9 +84,11 @@ log4j = {
 
 	info   'org.ktonga.greenpeace',
 	       'grails.app.services', // services
-		   'org.codehaus.groovy.grails.web.servlet'  //  controllers
+		   'grails.app.controllers.org.ktonga.greenpeace' // application controllers
 
-	error  'org.codehaus.groovy.grails.web.pages', //  GSP
+
+	error  'org.codehaus.groovy.grails.web.servlet', //  controllers
+		   'org.codehaus.groovy.grails.web.pages', //  GSP
            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
            'org.codehaus.groovy.grails.web.mapping', // URL mapping

@@ -65,7 +65,7 @@ body {
 							<ul class="dropdown-menu">
 								<li><a href="#">Environments</a></li>
 								<li><a href="#">Projects</a></li>
-								<li><g:link controller="manage" action="serverSelection">Import</g:link></li>
+								<li><g:link controller="import" action="main">Import</g:link></li>
 							</ul></li>
 					</ul>
 					<p class="navbar-text pull-right">

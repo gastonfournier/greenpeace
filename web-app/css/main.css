@@ -23,3 +23,6 @@ div.propVal input {
 	margin: 0px;
 	padding: 0px 2px;
 }
+.hidden {
+	display: none;
+}

@@ -7,30 +7,6 @@ import org.ktonga.greenpeace.compatibility.EscapeEnvironmentsResponse
 class ManageController {
 
 	static allowedMethods = []
-	def escapeConnectorService
-	
-	def serverSelection() {
-		render view: 'serverSelection', model: []
-	}
-
-	def showServerConfiguration(String server) {
-		try{
-			EscapeEnvironmentsResponse resp = escapeConnectorService.environments(server);
-			render view: 'importConfiguration', model: [environments: resp.environments, server: resp.server]
-		} catch (Exception e){
-			// TODO show an error page
-			render view: 'importConfiguration', model: [environments: [], server: server]
-		}
-	}
-	
-	def showApplications(String server, String envs){
-		EscapeApplicationsResponse resp;
-		List<String> envsList = envs.split(",")
-		for (String env : envsList) {
-			resp = escapeConnectorService.applications(server, env)
-		}
-		render view: 'viewApplications', model: [server: resp.server, applications: resp.applications]
-	}
 
 	def config() {
 		def config = this.findConfig(params)

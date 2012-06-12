@@ -16,8 +16,14 @@
 		</div>
 		<div class="span3 step2" id="environments">
 		</div>
-		<div class="span3 step3" id="applications">
+		<div class="span5 step3" id="applications">
 		</div>
+	</div>
+	<div class="hidden">
+		<g:form method="POST" name="importForm" action="importConfiguration">
+			<input type="hidden" name="environments" value="" />
+			<input type="hidden" name="applications" value="" />
+		</g:form>
 	</div>
 </body>
 </html>
