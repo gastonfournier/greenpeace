@@ -21,6 +21,7 @@
 	</div>
 	<div class="hidden">
 		<g:form method="POST" name="importForm" action="importConfiguration">
+			<input type="hidden" name="server" value="" />
 			<input type="hidden" name="environments" value="" />
 			<input type="hidden" name="applications" value="" />
 		</g:form>

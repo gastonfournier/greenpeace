@@ -25,17 +25,31 @@ class EscapeConnectorService {
     }
     
 	public EscapeApplicationsResponse applications(String server, String environment){
-		String fixedServer = fix(server)
+		String fixedServer = fix(server);
 		EscapeApplicationsResponse resp = new EscapeApplicationsResponse(server: fixedServer, environment: environment);
 		List<String> applications = []
 		String finalUrl = "${fixedServer}/environments/${environment}";
-		log.info("Querying ${finalUrl}")
+		log.info("Querying ${finalUrl}");
 		String contents = downloaderService.download(finalUrl)
 		if (!StringUtils.isEmpty(contents)){
 			applications = mapper.readValue(contents, new TypeReference<List<String>>(){})
 			resp.applications = applications
 		}
 		return resp
+	}
+
+	public Map<String, String> configurations(String server, String environment, String app){
+		String fixedServer = fix(server);
+		String finalUrl = "${fixedServer}/environments/${environment}/${app}";
+		log.info("Querying ${finalUrl}");
+		
+		Map<String, String> configs = [:]
+		String contents = downloaderService.download(finalUrl)
+		if (!StringUtils.isEmpty(contents)){
+			configs = parse(contents)
+		}
+		
+		return configs;
 	}
 	
 	// fixes server add http:// remove last / if exists
@@ -50,5 +64,22 @@ class EscapeConnectorService {
 		}
 		
 		return server;
+	}
+	
+	private Map<String, String> parse(String escConfig){
+		Map<String, String> values = [:]
+		def lines = escConfig.split("\n");
+		for (int lineIndex = 0; lineIndex < lines.length; lineIndex++){
+			log.info("processing line: ${lines[lineIndex]}")
+			def parts = lines[lineIndex].split("->");
+			log.info("parts = ${parts}")
+			String varname = parts[0];
+			String value = "";
+			if (parts.length > 1){
+				value = parts[1];
+			}
+			values.put(varname, value);
+		}
+		return values;
 	} 
 }

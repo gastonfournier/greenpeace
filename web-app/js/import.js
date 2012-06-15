@@ -37,6 +37,7 @@ $(document).ready(function(){
 		var envsParam = envs.join(",");
 		var appsParam = apps.join(",");
 		var form = $("#importForm");
+		form.find("input[name=server]").val(getServer());
 		form.find("input[name=environments]").val(envsParam);
 		form.find("input[name=applications]").val(appsParam);
 		form.submit();

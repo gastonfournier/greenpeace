@@ -8,6 +8,7 @@ class ImportController {
 
 	static allowedMethods = []
 	def escapeConnectorService
+	def importService
 	
 	def main() {
 		render view: 'main', model: []
@@ -36,11 +37,10 @@ class ImportController {
 		render view: 'applications', model: [server: resp.server, applications: applications.sort(), appsPerEnv: environments]
 	}
 	
-	def importConfiguration(String environments, String applications){
+	def importConfiguration(String server, String environments, String applications){
 		List<String> envs = environments.split(",");
 		List<String> apps = applications.split(",");
-		log.info(envs);
-		log.info(apps);
+		importService.importConfigurations(server, apps, envs);
 		render view: 'main', model: []
 	}
 }
