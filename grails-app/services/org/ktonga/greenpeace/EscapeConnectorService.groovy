@@ -70,9 +70,7 @@ class EscapeConnectorService {
 		Map<String, String> values = [:]
 		def lines = escConfig.split("\n");
 		for (int lineIndex = 0; lineIndex < lines.length; lineIndex++){
-			log.info("processing line: ${lines[lineIndex]}")
 			def parts = lines[lineIndex].split("->");
-			log.info("parts = ${parts}")
 			String varname = parts[0];
 			String value = "";
 			if (parts.length > 1){
